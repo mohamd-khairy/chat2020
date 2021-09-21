@@ -1,19 +1,19 @@
-const moment = require("moment");
+
 const cors = require("cors");
 const express = require("express");
 const app = express();
-const server = require("http").Server(app);
-const axios = require("axios");
-const io = require("socket.io")(server, {
-  cors: "*",
-});
-const path = require('path');
+const path = require('path')
 
+let port = process.env.PORT || 5000;
 
-server.listen(process.env.PORT || 5000, () =>
-  console.log(`Server is ready on port 5000`)
-);
+var corsOptions = {
+  origin: "https://rakhis.codlop.com/"
+};
 
-app.get("/home", (req, res) => {
+app.use(cors(corsOptions));
+app.use(express.urlencoded({ extended: true }));
+app.listen(port);
+
+app.get("/", (req, res) => {
   res.send("hello world!");
 });
